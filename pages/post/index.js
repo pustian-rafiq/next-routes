@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 function PostList({posts}) {
   return (
     <div>
@@ -8,9 +8,10 @@ function PostList({posts}) {
             posts.map( post => {
             return (
                     <div key={post.id} style={{border: '1px solid black', marginBottom: '2px', textAlign: 'center'}}> 
-                        <p> Id: {post.id}</p>
+                      <Link href={`post/${post.id}`} passHref>
                         <p> Post Title: {post.title}</p>
-                        <p> Post Body: {post.body}</p>
+                    </Link>
+                       
                     </div>    
             )
             })
@@ -21,6 +22,7 @@ function PostList({posts}) {
 }
 
 export default PostList
+
 
 export async function getStaticProps(){
     const respose = await fetch('https://jsonplaceholder.typicode.com/posts')
